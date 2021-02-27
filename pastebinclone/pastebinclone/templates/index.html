@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+{% if shortlink %}
+  <h5>Share content with link <a href="{{shortlink}}">{{shortlink}}</a></h5>
+{% endif %}
+{% if form %}
+  <form action="" method="post" class="enlist_form">
+    {% csrf_token %}
+    {{ form}}
+    <button type="submit">GET LINK</button>
+  </form>
+{% endif %}
+
+{%endblock%}

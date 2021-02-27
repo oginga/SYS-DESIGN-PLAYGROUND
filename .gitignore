@@ -1,0 +1,7 @@
+*.env
+*.pyc
+*.sqlite3
+.vscode/
+playground/
+migrations/
+__pycache__/
