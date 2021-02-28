@@ -51,4 +51,4 @@ python manage.py runserver
 * Implement Logs & analytics - capture Ips and page clicks
 * VUEjs frontend using graphql
 * Postgres DB implementation
-* Expiry date validation and execution
+* Expire overdue pastes.
