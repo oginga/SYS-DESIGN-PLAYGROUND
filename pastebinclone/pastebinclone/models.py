@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Paste(models.Model):
     content=models.TextField(null=False)
@@ -10,4 +11,9 @@ class Paste(models.Model):
     def clicked(self):
         self.clicks+=1
         self.save()
+    
+    def is_expired(self):
+        return self.expiry < datetime.today()
+
+
 

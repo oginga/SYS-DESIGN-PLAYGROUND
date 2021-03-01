@@ -76,7 +76,10 @@ def content(request,*args,**kwargs):
             paste_id=base_62_decode(suffix)
             paste=Paste.objects.get(id=paste_id)
             if paste:
-                return TemplateResponse(request,'content.html',{'content':paste.content})
+                if paste.is_expired:
+                    return TemplateResponse(request,'content.html',{'content':paste.content})
+                else:
+                    return TemplateResponse(request,'content.html',{'content':"Sorry,Content has expired!"})
             else:
                 return TemplateResponse(request,'content.html',{'content':"No content available!"})
 

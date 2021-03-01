@@ -52,3 +52,4 @@ python manage.py runserver
 * VUEjs frontend using graphql
 * Postgres DB implementation
 * Expire overdue pastes.
+* Perform benchmarks and profiling
