@@ -2,6 +2,7 @@
 *.pyc
 *.sqlite3
 .vscode/
+static/
 playground/
 migrations/
 __pycache__/

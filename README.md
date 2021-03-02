@@ -47,9 +47,9 @@ python manage.py runserver
 
 ## TODO
 * Upload pasted content to an Object store ,file server/aws
-* Setup nginx for SSL termination & cache
+* Setup nginx for SSL termination, cache & to serve static content 
 * Implement Logs & analytics - capture Ips and page clicks
 * VUEjs frontend using graphql
 * Postgres DB implementation
-* Expire overdue pastes.
 * Perform benchmarks and profiling
+* Containerize the app and use nginx as load balancer

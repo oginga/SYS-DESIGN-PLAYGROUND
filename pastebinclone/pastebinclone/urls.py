@@ -15,13 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
+from django.conf.urls import url,include
 from pastebinclone.views import *
 
 
 urlpatterns=(
 	path(r'',index),
+    url(r'^silk/', include('silk.urls', namespace='silk')),
     url(r'^(?P<suffix>[a-zA-Z0-9]+)',content),
     path('admin/', admin.site.urls),
 	)
 
+
+urlpatterns += (url(r'^silk/', include('silk.urls', namespace='silk')),)
