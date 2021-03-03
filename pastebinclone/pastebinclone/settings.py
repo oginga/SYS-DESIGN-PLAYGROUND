@@ -72,6 +72,41 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pastebinclone.wsgi.application'
 
 
+LOGGING =   {
+                'version':1,
+                'disable_existing_loggers':False,
+                'formatters':   {
+                                    'standard' : {
+                                                    'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
+                                                    'datefmt' : "%d/%b/%Y %H:%M:%S"
+                                                },
+                                    'activity' : {
+                                        'format' : "{asctime} {levelname} {module} {user} {message}",
+                                        'style' : '{'
+                                    }
+                                },
+                'handlers': {
+                                'file': {
+                                    'level': 'INFO',
+                                    'class': 'logging.FileHandler',
+                                    'filename': BASE_DIR+'/pastebinclone.log',
+                                    'formatter': 'standard',
+                                },
+                            },
+                'loggers': {
+                                'django': {
+                                    'handlers': ['file'],
+                                    'level': 'WARNING',
+                                    'propagate': True,
+                                },
+                                'pastebinclone': {
+                                    'handlers': ['file'],
+                                    'level': 'INFO',
+                                    'propagate': True,
+                                },
+                }
+            }
+
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
