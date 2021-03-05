@@ -81,7 +81,7 @@ LOGGING =   {
                                                     'datefmt' : "%d/%b/%Y %H:%M:%S"
                                                 },
                                     'activity' : {
-                                        'format' : "{asctime} {levelname} {module} {user} {message}",
+                                        'format' : "{asctime} {levelname} {module} {message}",
                                         'style' : '{'
                                     }
                                 },
@@ -89,8 +89,14 @@ LOGGING =   {
                                 'file': {
                                     'level': 'INFO',
                                     'class': 'logging.FileHandler',
-                                    'filename': BASE_DIR+'/pastebinclone.log',
+                                    'filename': str(BASE_DIR)+'/django.log',
                                     'formatter': 'standard',
+                                },
+                                'activityfile': {
+                                    'level': 'INFO',
+                                    'class': 'logging.FileHandler',
+                                    'filename': str(BASE_DIR)+'/pastebinclone.log',
+                                    'formatter': 'activity',
                                 },
                             },
                 'loggers': {
@@ -100,7 +106,7 @@ LOGGING =   {
                                     'propagate': True,
                                 },
                                 'pastebinclone': {
-                                    'handlers': ['file'],
+                                    'handlers': ['activityfile'],
                                     'level': 'INFO',
                                     'propagate': True,
                                 },

@@ -1,5 +1,9 @@
 from django.db import models
 from datetime import datetime
+import pytz
+
+utc=pytz.UTC
+
 
 class Paste(models.Model):
     content=models.TextField(null=False)
@@ -13,7 +17,7 @@ class Paste(models.Model):
         self.save()
     
     def is_expired(self):
-        return self.expiry < datetime.today()
+        return self.expiry < utc.localize(datetime.today())
 
 
 

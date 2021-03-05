@@ -4,10 +4,14 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from django.contrib import messages
+import logging
+
 
 import re
 from functools import reduce
 from datetime import datetime
+
+logger = logging.getLogger('pastebinclone')
 
 
 BASE_62_ALPHABET=['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -57,6 +61,8 @@ def index(request):
                 shortlink=f"http://127.0.0.1:8000/{shortlink_suffix}"
                 newPaste.shortlink=shortlink
 
+                logger.info(f"link created")
+
                 messages.success(request,('Content saved successfully'))
                 return TemplateResponse(request,'index.html',{'shortlink':shortlink})
             else:
@@ -76,7 +82,10 @@ def content(request,*args,**kwargs):
             paste_id=base_62_decode(suffix)
             paste=Paste.objects.get(id=paste_id)
             if paste:
-                if paste.is_expired:
+                if not paste.is_expired():
+                    paste.clicked() # increment page clicks
+                    paste.save()
+                    logger.info(f"paste {paste.id} clicked")
                     return TemplateResponse(request,'content.html',{'content':paste.content})
                 else:
                     return TemplateResponse(request,'content.html',{'content':"Sorry,Content has expired!"})
